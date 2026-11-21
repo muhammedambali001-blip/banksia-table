@@ -1,0 +1,225 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-jost);
+  --font-display: var(--font-cormorant);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  /* Banksia Table brand palette */
+  --color-eucalyptus: #31483c;
+  --color-eucalyptus-deep: #26382e;
+  --color-eucalyptus-soft: #3e5a4c;
+  --color-sage: #dde4d8;
+  --color-sage-soft: #e9ede4;
+  --color-cream: #f5f0e7;
+  --color-cream-soft: #faf7f1;
+  --color-terracotta: #b86d4b;
+  --color-terracotta-deep: #9c5839;
+  --color-charcoal: #292b27;
+  --color-brass: #b99b67;
+  --color-brass-soft: #cdb080;
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: #f5f0e7;
+  --foreground: #292b27;
+  --card: #faf7f1;
+  --card-foreground: #292b27;
+  --popover: #faf7f1;
+  --popover-foreground: #292b27;
+  --primary: #31483c;
+  --primary-foreground: #f5f0e7;
+  --secondary: #dde4d8;
+  --secondary-foreground: #31483c;
+  --muted: #e9ede4;
+  --muted-foreground: #5d635c;
+  --accent: #dde4d8;
+  --accent-foreground: #31483c;
+  --destructive: #b3452e;
+  --border: #31483c22;
+  --input: #31483c33;
+  --ring: #b99b67;
+  --chart-1: #31483c;
+  --chart-2: #b86d4b;
+  --chart-3: #b99b67;
+  --chart-4: #dde4d8;
+  --chart-5: #292b27;
+  --sidebar: #f5f0e7;
+  --sidebar-foreground: #292b27;
+  --sidebar-primary: #31483c;
+  --sidebar-primary-foreground: #f5f0e7;
+  --sidebar-accent: #dde4d8;
+  --sidebar-accent-foreground: #31483c;
+  --sidebar-border: #31483c22;
+  --sidebar-ring: #b99b67;
+}
+
+.dark {
+  --background: #292b27;
+  --foreground: #f5f0e7;
+  --card: #31483c;
+  --card-foreground: #f5f0e7;
+  --popover: #31483c;
+  --popover-foreground: #f5f0e7;
+  --primary: #b99b67;
+  --primary-foreground: #292b27;
+  --secondary: #3e5a4c;
+  --secondary-foreground: #f5f0e7;
+  --muted: #3e5a4c;
+  --muted-foreground: #dde4d8;
+  --accent: #3e5a4c;
+  --accent-foreground: #f5f0e7;
+  --destructive: #d4694a;
+  --border: #dde4d822;
+  --input: #dde4d833;
+  --ring: #b99b67;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream text-charcoal;
+    font-family: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: #b86d4b;
+    color: #f5f0e7;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  }
+}
+
+/* ---------- scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- typography helpers ---------- */
+.font-display {
+  font-family: var(--font-cormorant), Georgia, "Times New Roman", serif;
+}
+.eyebrow {
+  @apply text-xs font-medium uppercase text-brass;
+  letter-spacing: 0.32em;
+}
+.body-lg {
+  @apply text-lg leading-relaxed text-charcoal/75;
+}
+
+/* ---------- buttons ---------- */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 bg-eucalyptus px-8 py-4 text-[13px] font-medium uppercase text-cream transition-all duration-300 hover:bg-terracotta;
+  letter-spacing: 0.18em;
+}
+.btn-outline {
+  @apply inline-flex items-center justify-center gap-2 border border-charcoal/30 bg-transparent px-8 py-4 text-[13px] font-medium uppercase text-charcoal transition-all duration-300 hover:border-eucalyptus hover:bg-eucalyptus hover:text-cream;
+  letter-spacing: 0.18em;
+}
+.btn-outline-light {
+  @apply inline-flex items-center justify-center gap-2 border border-cream/50 bg-transparent px-8 py-4 text-[13px] font-medium uppercase text-cream transition-all duration-300 hover:border-brass hover:bg-brass hover:text-charcoal;
+  letter-spacing: 0.18em;
+}
+
+/* ---------- chat scrollbar ---------- */
+.chat-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.chat-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: #b99b67aa;
+  border-radius: 999px;
+}
+
+/* ---------- typing indicator ---------- */
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+.typing-dot {
+  animation: typing-bounce 1.1s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+/* ---------- menu tab underline ---------- */
+.menu-tab {
+  position: relative;
+}
+.menu-tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 100%;
+  background: #b86d4b;
+  transform: scaleX(0);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.menu-tab[data-active="true"]::after {
+  transform: scaleX(1);
+}
